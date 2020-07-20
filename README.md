@@ -7,7 +7,7 @@
 #### Installation
 1. Run: 
     - npm install (that should install bower_components if not run 'bower install')
-    - npm start
+    - npm start (if port is already in use please open package.json and change port on line 17)
 
 #### Quick code guide
 To register new files add them on bottom of app/index.html
@@ -21,4 +21,4 @@ App structure
             * view
             * routes.js (contains routes for job section)
         * quote (here goes all quote related code)
-            * same as ^
+            * same as above ^
