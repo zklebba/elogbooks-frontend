@@ -2,8 +2,11 @@
     'use strict';
 
     angular
-        .module('elogbooks.quote', [])
-        .config(registerRoutes);
+        .module('elogbooks.quote', ['elogbooks.apiClient'])
+        .config(registerRoutes)
+        .factory('quoteService', ['$http', 'apiClient', ($http, apiClient) => {
+            return new apiClient.quote($http);
+        }]);
 
     function registerRoutes($stateProvider) {
         $stateProvider
@@ -18,16 +21,16 @@
                 controllerAs: 'vm',
                 templateUrl: '/modules/quote/list/list.html',
                 resolve: {
-                    quoteCollectionResponse : function () {
-                        return [
-                            { id:1, description: 'Carpet deep clean' },
-                            { id:2, description: 'New carpet in reception' },
-                            { id:3, description: 'New entrance doors' },
-                            { id:4, description: 'Fixing toilet leak' },
-                            { id:5, description: 'New parts required for boiler' },
-                            { id:6, description: 'New office equipment' }
-                        ]
-                    }
+                    quoteCollectionResponse : quoteService => quoteService.getAll()
+                }
+            })
+            .state('quotes.view', {
+                url: '/view/{id}',
+                controller: 'QuoteViewController',
+                controllerAs: 'vm',
+                templateUrl: 'modules/quote/view/view.html',
+                resolve: {
+                    quoteResponse : ($stateParams, quoteService) => quoteService.get($stateParams.id)
                 }
             })
     }

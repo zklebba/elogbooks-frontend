@@ -7,11 +7,11 @@
         </tr>
     </thead>
     <tbody>
-    <tr ng-repeat="quote in vm.quoteCollection">
+    <tr ng-repeat="quote in vm.quoteCollection.items">
         <th scope="row">{{ quote.id }}</th>
         <td>{{ quote.description }}</td>
         <td>
-            <button class="btn btn-xs btn-default">View</button>
+            <button class="btn btn-xs btn-default" ui-sref="quotes.view({id: quote.id})">View</button>
         </td>
     </tr>
     </tbody>

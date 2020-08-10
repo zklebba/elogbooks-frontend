@@ -7,6 +7,6 @@
 
     function JobViewController(jobResponse) {
         var vm = this;
-        vm.job = jobResponse.item;
+        vm.job = jobResponse.items[0];
     }
 })();
