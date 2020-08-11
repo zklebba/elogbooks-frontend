@@ -10,5 +10,12 @@
             <dt>Status</dt>
             <dd>{{ vm.job.getTextStatus() }}</dd>
         </dl>
+
+        <dl class="dl-horizontal">
+            <dt>Actions</dt>
+            <dd>
+                <button class="btn btn-xs btn-primary" ui-sref="jobs.update({id: vm.job.id})">Update</button>
+            </dd>
+        </dl>
     </div>
 </div>

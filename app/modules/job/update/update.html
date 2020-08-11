@@ -1,0 +1,21 @@
+<div class="panel panel-default">
+    <div class="panel-heading">Update Job (#{{ vm.job.id }})</div>
+    <div class="panel-body">
+        <form ng-submit="vm.update()">
+            <div class="form-group">
+                <label for="description">Description</label>
+                <input type="text" class="form-control" id="description" ng-model="vm.job.description" placeholder="Job Description">
+            </div>
+
+            <div class="form-group">
+                <label for="status">Status</label>
+
+                <select class="form-control" id="status" ng-model="vm.job.status" >
+                    <option ng-repeat="status in vm.statuses" ng-value="status.id">{{ status.label }}</option>
+                </select>
+
+            </div>
+            <button type="submit" class="btn btn-default">Update</button>
+        </form>
+    </div>
+</div>

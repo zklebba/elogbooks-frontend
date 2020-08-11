@@ -30,6 +30,17 @@
                 controllerAs: 'vm',
                 templateUrl: 'modules/job/create/create.html',
             })
+            .state('jobs.update', {
+                url: '/update/{id}',
+                controller: 'JobUpdateController',
+                controllerAs: 'vm',
+                templateUrl: 'modules/job/update/update.html',
+                resolve: {
+                    jobResponse : function ($stateParams, jobService) {
+                        return jobService.get($stateParams.id);
+                    }
+                }
+            })
             .state('jobs.view', {
                 url: '/view/{id}',
                 controller: 'JobViewController',

@@ -3,23 +3,21 @@
 
     angular
         .module('elogbooks.job')
-        .controller('JobCreateController', ['$http', '$state', JobCreateController]);
+        .controller('JobCreateController', ['$http', '$state', 'apiClient', JobCreateController]);
 
-    function JobCreateController($http, $state) {
-        var vm = this;
+    function JobCreateController($http, $state, apiClient) {
+        var vm = this,
+            jobApiClient = new apiClient.job($http);
+
         vm.job = {
-            description : null
+            description: null,
+            status: apiClient.jobEntity.status.open.id
         };
         vm.create = create;
 
         function create() {
-            $http.post(
-                'http://localhost:8001/job',
-                vm.job
-            ).then(function (response) {
-                $state.go('jobs.view', {id:response.data.id});
-            }, function () {
-                console.log('Request Failed');
+            jobApiClient.create(vm.job, response => {
+                $state.go('jobs.view', {id:response.id});
             });
         }
     }
